@@ -25,3 +25,6 @@ Mounts/system/*
 Mounts/system_ext/*
 Mounts/product/*
 Mounts/vendor/*
+
+# Temp repacked images
+*_repack.img

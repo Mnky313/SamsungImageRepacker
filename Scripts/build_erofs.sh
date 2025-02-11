@@ -2,7 +2,7 @@
 
 system_opts=$(grep -Po 'mkfs.erofs options: +\K(.*$)' Mounts/system/config/system_fs_options)
 system_ext_opts=$(grep -Po 'mkfs.erofs options: +\K(.*$)' Mounts/system_ext/config/system_ext_fs_options)
-product_opts=$(grep -Po 'mkfs.erofs options: +\K(.*$)' Mounts/prodct/config/product_fs_options)
+product_opts=$(grep -Po 'mkfs.erofs options: +\K(.*$)' Mounts/product/config/product_fs_options)
 vendor_opts=$(grep -Po 'mkfs.erofs options: +\K(.*$)' Mounts/vendor/config/vendor_fs_options)
 
 

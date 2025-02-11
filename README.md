@@ -2,10 +2,6 @@
 
 I use these scripts to unpack, debloat & modify, then repack firmware for flashing via the included odin.
 
-Currently this only works with devices that use EXT4 not EROFS (it seems like devices after ~2022 switched to EROFS, my Fold3 doesn't use it but Fold5 does).
-
-Working on adding EROFS support
-
 # Basic steps to use this to debloat/install apps.
 
 Copy stock firmware images (BL_\*.tar.md5, AP_\*.tar.md5, CP_\*.tar.md5, CSC_\*.tar.md5) to the Stock folder (if you want to pre-patch the AP file with magisk that also works just make sure it's named AP_\*)
@@ -51,7 +47,7 @@ lp/lpunpack Custom/AP/super.raw Custom/super # Extract image
 # Delete old images so they don't get repacked later
 rm Custom/AP/super.img.lz4 
 rm Custom/AP/super.img
-rm Custom/AP/super.raw
+
 ```
 
 Mounting partitions:
@@ -82,12 +78,11 @@ sudo umount Custom/super/vendor.img
 Rebuild super partition:
 This long command automatically grabs the size of the images instead of having to manually calculate them.
 
-This --device super:X *might* be device specific but AFAIK it works on both my Fold3 and 5 so I assume it's not, though they are both 256gb phones so it probably would need to be changed for different storage sizes.
 ```
 lp/lpmake \
 --metadata-size 65535 --super-name super \
 --metadata-slots 1 \
---device super:12979273728 \
+--device super:$(stat -c '%s' "$(pwd)/Custom/AP/super.raw") \
 --group main:$(expr $(stat -c '%s' "$(pwd)/Custom/super/odm.img") + $(stat -c '%s' "$(pwd)/Custom/super/product.img") + $(stat -c '%s' "$(pwd)/Custom/super/system.img") + $(stat -c '%s' "$(pwd)/Custom/super/vendor.img")) \
 --partition odm:readonly:$(stat -c '%s' "$(pwd)/Custom/super/odm.img"):main --image odm="$(pwd)/Custom/super/odm.img" \
 --partition product:readonly:$(stat -c '%s' "$(pwd)/Custom/super/product.img"):main --image product="$(pwd)/Custom/super/product.img" \
@@ -95,6 +90,8 @@ lp/lpmake \
 --partition vendor:readonly:$(stat -c '%s' "$(pwd)/Custom/super/vendor.img"):main --image vendor="$(pwd)/Custom/super/vendor.img" \
 --sparse \
 --output "$(pwd)/Custom/AP/super.img"
+
+rm Custom/AP/super.raw # Remove super.raw as it's not needed anymore
 ```
 
 Repack the images into tar
@@ -142,7 +139,7 @@ erofs/extract.erofs -i Custom/super/vendor.img.orig -x -f -o Mounts/vendor
 ```
 
 At this point you can modify these images in their Mounts/* folder.
-**make sure you update the Mounts/X/config/system_fs_options file to reflect your changes** (removing/adding folders/files)
+**make sure you update the Mounts/X/config/X_fs_options & Mounts/X/config/X_file_contexts file to reflect your changes** (removing/adding folders/files)
 
 After you're done you can use the commands in the Mounts/X/config/system_fs_options to rebuild the images in their original location (not .orig)
 
