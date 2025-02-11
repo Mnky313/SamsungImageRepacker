@@ -120,3 +120,13 @@ The -d flag shouldn't be needed but I've had better luck with it so I just left 
 -s Custom/CSC_modified.tar \
 -d $(./odin4 -l)
 ```
+
+# Stage 2 ADB script
+
+There are some apps that are in partitions that can't be mounted (optics/prism) as well as user apps that aren't removed but can be simply uninstalled after the phone is booted.
+
+This script handles that but looking at Mods/bloatware-user.txt
+
+It also installs the system apks as the user to make them actually function correctly.
+
+(and it disables bluetooth)
