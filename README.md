@@ -10,7 +10,7 @@ Working on adding EROFS support
 
 Copy stock firmware images (BL_\*.tar.md5, AP_\*.tar.md5, CP_\*.tar.md5, CSC_\*.tar.md5) to the Stock folder (if you want to pre-patch the AP file with magisk that also works just make sure it's named AP_\*)
 
-Modify the Mods/bloatware.txt file with the list of packages you want to remove, I included mine however mine also removes play services and related item because I replace them with microG (as well as breaks bluetooth support, never bothered to figure out what causes that as I don't use bluetooth so I just leave it off)
+Modify the Mods/bloatware.txt file with the list of packages you want to remove, I included mine however mine also removes play services and related items because I replace them with microG (as well as breaks bluetooth support, never bothered to figure out what causes that as I don't use bluetooth so I just leave it off)
 
 (if you want to manually mess with the filesystem check out the manual instructions later on)
 
@@ -22,7 +22,7 @@ Once you get to 'waiting for device...' plug in your phone in Download mode and 
 
 # Manual Steps/what the scripts do
 
-(I'm assuming your current directory is the root directory for all these commands)
+(I'm assuming your current directory is the root directory of this repo for all these commands)
 
 Copy stock firmware images (BL_\*.tar.md5, AP_\*.tar.md5, CP_\*.tar.md5, CSC_\*.tar.md5) to the Stock folder (if you want to pre-patch the AP file with magisk that also works just make sure it's named AP_\*)
 
