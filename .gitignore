@@ -1,0 +1,21 @@
+# Actual Firmware
+Stock/*
+Custom/AP_modified.tar
+Custom/BL_modified.tar
+Custom/CSC_modified.tar
+Custom/CP_modified.tar
+Custom/AP/*
+Custom/BL/*
+Custom/CSC/*
+Custom/USA_CSC/*
+Custom/CP/*
+Custom/super/*
+
+# My notes
+Android 14 Image Creation and Setup.txt
+
+# Old scirpts
+Scripts/.old
+
+# APKs
+Mods/APKs/*

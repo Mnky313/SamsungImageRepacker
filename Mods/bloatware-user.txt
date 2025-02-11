@@ -1,0 +1,2 @@
+com.samsung.android.app.tips
+com.facebook.katana
