@@ -8,4 +8,4 @@ lp/lpunpack Custom/AP/super.raw Custom/super
 # Delete old images
 rm Custom/AP/super.img.lz4
 rm Custom/AP/super.img
-rm Custom/AP/super.raw
+#rm Custom/AP/super.raw # Leave super.raw to get partition size later

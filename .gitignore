@@ -19,3 +19,9 @@ Scripts/.old
 
 # APKs
 Mods/APKs/*
+
+# Mounts
+Mounts/system/*
+Mounts/system_ext/*
+Mounts/product/*
+Mounts/vendor/*

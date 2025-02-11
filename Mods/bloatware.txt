@@ -216,4 +216,8 @@ system/system/system_ext/priv-app/com.qualcomm.location
 system/system/system_ext/priv-app/GoogleFeedback
 system/system/system_ext/priv-app/GoogleServicesFramework
 system/system/system_ext/priv-app/SetupWizard
+system_ext/priv-app/com.qualcomm.location
+system_ext/priv-app/GoogleFeedback
+system_ext/priv-app/GoogleServicesFramework
+system_ext/priv-app/SetupWizard
 vendor/app/QCC-TR-UI
