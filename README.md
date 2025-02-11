@@ -121,6 +121,34 @@ The -d flag shouldn't be needed but I've had better luck with it so I just left 
 -d $(./odin4 -l)
 ```
 
+# Manual modification of EROFS devices
+
+Follow the same steps until you get to the mounting partitions section.
+
+Move original images so we can rebuild them later
+```
+mv Custom/super/system.img Custom/super/system.img.orig
+mv Custom/super/system_ext.img Custom/super/system_ext.img.orig
+mv Custom/super/product.img Custom/super/product.img.orig
+mv Custom/super/vendor.img Custom/super/vendor.img.orig
+```
+
+Extract the images:
+```
+erofs/extract.erofs -i Custom/super/system.img.orig -x -f -o Mounts/system
+erofs/extract.erofs -i Custom/super/system_ext.img.orig -x -f -o Mounts/system_ext
+erofs/extract.erofs -i Custom/super/product.img.orig -x -f -o Mounts/product
+erofs/extract.erofs -i Custom/super/vendor.img.orig -x -f -o Mounts/vendor
+```
+
+At this point you can modify these images in their Mounts/* folder.
+**make sure you update the Mounts/X/config/system_fs_options file to reflect your changes** (removing/adding folders/files)
+
+After you're done you can use the commands in the Mounts/X/config/system_fs_options to rebuild the images in their original location (not .orig)
+
+From there the steps are the same as EXT4, use lpmake to rebuild the super partition & tar the partitions together like normal.
+
+
 # Stage 2 ADB script
 
 There are some apps that are in partitions that can't be mounted (optics/prism) as well as user apps that aren't removed but can be simply uninstalled after the phone is booted.
