@@ -1,15 +1,31 @@
 #!/bin/bash
 
-for package in $(cat Mods/bloatware.txt); do
-    part=$(echo $package | grep -Po '^\w+/')
-    echo $part$package
+declare -a packagepaths=(
+    "system/system/system/app"
+    "system/system/system/priv-app"
+    "system_ext/system_ext/app"
+    "system_ext/system_ext/priv-app"
+    "product/app"
+    "product/priv-app"
+    "vendor/app"
+    "vendor/priv-app"
+)
 
-    # Modify system_file_context
-    temppkg=${package//\//\\\/}
-    temppkg=${temppkg//\./\\\.}
-    sed -i "/^\/$temppkg/d" Mounts/${part::-1}/config/${part::-1}_file_contexts
-    sed -i "/^\/$temppkg/d" Mounts/${part::-1}/config/${part::-1}_fs_config
-    
-    # Remove package
-    sudo rm -rf Mounts/$part$package
+for path in "${packagepaths[@]}"; do
+    for package in $(cat Mods/bloatware.txt); do
+        if ls Mounts/$path/$package 1> /dev/null 2>&1; then
+            tmppart=$(echo $path | grep -Po '^\w+/')
+            part=${tmppart::-1}
+
+            echo Removing $path/$package...
+
+            # Modify system_file_context
+            temppkg=${package//\//\\\/}
+            temppkg=${temppkg//\./\\\.}
+            sed -i "/^\/$temppkg/d" Mounts/$part/config/${part}_file_contexts
+            sed -i "/^\/$temppkg/d" Mounts/$part/config/${part}_fs_config
+            
+            sudo rm -rf Mounts/$path/$package
+        fi
+    done
 done
