@@ -9,14 +9,15 @@ if erofs/dump.erofs Custom/super/system.img; then
     sh Scripts/debloat_erofs.sh
     sh Scripts/install_apps_erofs.sh
     sh Scripts/build_erofs.sh
+    sh Scripts/build_super_erofs.sh
 else
     printf 'EXT4 Image\n'
     sh Scripts/mount.sh
     sh Scripts/debloat.sh
     sh Scripts/install_apps.sh
     sh Scripts/unmount.sh
+    sh Scripts/build_super.sh
 fi
-sh Scripts/build_super.sh
 sh Scripts/pack.sh
 sh Scripts/flash.sh
 #sh Scripts/cleanup.sh

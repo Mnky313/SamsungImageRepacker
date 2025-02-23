@@ -5,10 +5,10 @@ declare -a packagepaths=(
     "system/system/system/priv-app"
     "system_ext/system_ext/app"
     "system_ext/system_ext/priv-app"
-    "product/app"
-    "product/priv-app"
-    "vendor/app"
-    "vendor/priv-app"
+    "product/product/app"
+    "product/product/priv-app"
+    "vendor/vendor/app"
+    "vendor/vendor/priv-app"
 )
 
 for path in "${packagepaths[@]}"; do
@@ -20,10 +20,14 @@ for path in "${packagepaths[@]}"; do
             echo Removing $path/$package...
 
             # Modify system_file_context
-            temppkg=${package//\//\\\/}
+            tmppath=${path//$part\/$part/$part}
+            temppkg=${package//\*/.*}
+            temppkg=$tmppath/$temppkg
+            temppkg=${temppkg//\//\\\/}
             temppkg=${temppkg//\./\\\.}
-            sed -i "/^\/$temppkg/d" Mounts/$part/config/${part}_file_contexts
-            sed -i "/^\/$temppkg/d" Mounts/$part/config/${part}_fs_config
+            
+            sed -i "/^\/$temppkg[\/ ]/d" Mounts/$part/config/${part}_file_contexts
+            sed -i "/^$temppkg[\/ ]/d" Mounts/$part/config/${part}_fs_config
             
             sudo rm -rf Mounts/$path/$package
         fi
