@@ -12,9 +12,9 @@ for package in $(cat Mods/bloatware-user.txt); do
 done
 
 # Uninstall APEX bloatware packages for user
-for userpackage in $(cat Mods/bloatware-user.txt); do
+for userpackage in $(cat Mods/bloatware-user0.txt); do
     echo $userpackage
-    adb uninstall -k --user 0 "$userpackage"
+    adb uninstall --user 0 "$userpackage"
 done
 
 # Disable Bluetooth
