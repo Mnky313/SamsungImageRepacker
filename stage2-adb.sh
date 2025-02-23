@@ -11,5 +11,11 @@ for package in $(cat Mods/bloatware-user.txt); do
     adb uninstall "$package"
 done
 
+# Uninstall APEX bloatware packages for user
+for userpackage in $(cat Mods/bloatware-user.txt); do
+    echo $userpackage
+    adb uninstall -k --user 0 "$userpackage"
+done
+
 # Disable Bluetooth
 adb shell cmd bluetooth_manager disable
