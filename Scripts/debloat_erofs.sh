@@ -17,17 +17,16 @@ for path in "${packagepaths[@]}"; do
             tmppart=$(echo $path | grep -Po '^\w+/')
             part=${tmppart::-1}
 
-            echo Removing $path/$package...
+            printf "Removing $path/$package...\n"
 
-            # Modify system_file_context
-            tmppath=${path//$part\/$part/$part}
-            temppkg=${package//\*/.*}
-            temppkg=$tmppath/$temppkg
-            temppkg=${temppkg//\//\\\/}
-            temppkg=${temppkg//\./\\\.}
+            tmppath=${path//$part\/$part/$part} # Remove partition from path (i.e. /system_ext/system_ext/... -> /system_ext/...)
+            temppkg=$tmppath/$package # Combine package with real path
+            temppkg=${temppkg//\//\\\/} # Escape / for regex match
+            temppkg=${temppkg//\./\\\.} # Escape . for regex match
+            temppkg=${temppkg//\*/.*} # Convert * to .* so regex match works for bloatware with wildcard
             
-            sed -i "/^\/$temppkg[\/ ]/d" Mounts/$part/config/${part}_file_contexts
-            sed -i "/^$temppkg[\/ ]/d" Mounts/$part/config/${part}_fs_config
+            sed -i "/^\/$temppkg[\/ ]/d" Mounts/$part/config/${part}_file_contexts # Modify file_context to remove removed package(s)
+            sed -i "/^$temppkg[\/ ]/d" Mounts/$part/config/${part}_fs_config # Modify fs_config to remove removed package(s)
             
             sudo rm -rf Mounts/$path/$package
         fi
