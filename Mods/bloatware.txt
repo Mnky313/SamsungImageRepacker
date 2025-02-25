@@ -224,7 +224,6 @@ QCC-TR-UI
 QCC
 Phonesky
 Routines
-DynamicLockscreen
 SDMConfig
 NetworkDiagnostics
 SafetyInformation
