@@ -232,3 +232,5 @@ PhotoTable
 SimAppDialog
 WallpaperBackup
 WallpaperCropper
+KnoxCore
+ShortcutBNR
