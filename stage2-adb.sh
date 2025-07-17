@@ -2,7 +2,7 @@
 
 # Install system apps as user
 for apk in Mods/APKs/*.apk; do
-    adb install "$apk"
+    adb install --bypass-low-target-sdk-block "$apk"
 done
 
 # Remove user bloatware packages

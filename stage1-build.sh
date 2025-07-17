@@ -20,4 +20,4 @@ else
 fi
 sh Scripts/pack.sh
 sh Scripts/flash.sh
-#sh Scripts/cleanup.sh
+sh Scripts/cleanup.sh

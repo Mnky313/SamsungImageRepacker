@@ -20,6 +20,9 @@ Scripts/.old
 # APKs
 Mods/APKs/*
 
+# Boot image
+Mods/boot.img
+
 # Mounts
 Mounts/system/*
 Mounts/system_ext/*
