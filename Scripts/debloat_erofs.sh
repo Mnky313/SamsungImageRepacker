@@ -7,6 +7,7 @@ declare -a packagepaths=(
     "system_ext/system_ext/priv-app"
     "product/product/app"
     "product/product/priv-app"
+    "product/product/overlay"
     "vendor/vendor/app"
     "vendor/vendor/priv-app"
 )

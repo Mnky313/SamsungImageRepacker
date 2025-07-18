@@ -2,3 +2,7 @@ com.google.android.adservices.api
 com.google.android.ondevicepersonalization.services
 com.google.android.federatedcompute
 com.google.android.healthconnect.controller
+com.android.rkpdapp
+com.android.virtualmachine.res
+com.google.android.health.connect.backuprestore
+com.google.android.safetycenter.resources
